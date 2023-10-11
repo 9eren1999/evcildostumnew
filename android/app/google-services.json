@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1022135089366",
+    "project_id": "evcildostum-f2326",
+    "storage_bucket": "evcildostum-f2326.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1022135089366:android:5343a4b1067760f4977177",
+        "android_client_info": {
+          "package_name": "com.example.evcildostum"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVLZSiK3d9ats5a_vXnNnhzWUF7eG4yjM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
