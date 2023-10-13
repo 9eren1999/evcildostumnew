@@ -1,4 +1,5 @@
 import 'package:evcildostum/girisyapscreen/girisyappage.dart';
+import 'package:evcildostum/kayitolscreen/step2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class _KayitOlPageState extends State<KayitOlPage> {
           Align(
             alignment: Alignment.topCenter,
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.5,
+              height: MediaQuery.of(context).size.height * 0.3,
               color: Colors.red.shade600,
             ),
           ),
@@ -42,7 +43,7 @@ class _KayitOlPageState extends State<KayitOlPage> {
             child: SingleChildScrollView(
               child: Container( 
                 decoration: BoxDecoration( 
-                  border: Border.all(color: Colors.red.shade600),
+                  border: Border.all(color: Colors.black12),
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
                 ), margin: EdgeInsets.only(top: 40, bottom: 40), 
@@ -63,7 +64,7 @@ class _KayitOlPageState extends State<KayitOlPage> {
                             children: <Widget>[
                               Lottie.asset(
                                 'assets/animations/registeranimasyon.json',
-                                height: 200,
+                                height: 150,
                               ),
                               SizedBox(height: 20),
                               Text('Kayıt Ol',
@@ -106,31 +107,31 @@ class _KayitOlPageState extends State<KayitOlPage> {
                               ),
                               SizedBox(height: 10),
                               TextFormField(
-                                decoration: InputDecoration(
-                                    labelText: 'Şifre',
-                                    border: OutlineInputBorder()),
-                                obscureText: true,
-                                validator: (value) {
-                                  if (value!.isEmpty) return 'Şifre giriniz';
-                                  return null;
-                                },
-                                onSaved: (value) => _sifre = value!,
-                              ),
-                              SizedBox(height: 10),
-                              TextFormField(
-                                decoration: InputDecoration(
-                                  labelText: 'Şifre Tekrar',
-                                  border: OutlineInputBorder(),
-                                ),
-                                obscureText: true,
-                                validator: (value) {
-                                  if (value!.isEmpty)
-                                    return 'Şifre tekrarını giriniz';
-                                  if (_sifre != null && value != _sifre)
-                                    return 'Şifreler eşleşmiyor';
-                                  return null;
-                                },
-                              ),
+  decoration: InputDecoration(
+      labelText: 'Şifre',
+      border: OutlineInputBorder()),
+  obscureText: true,
+  validator: (value) {
+    if (value!.isEmpty) return 'Şifre giriniz';
+    _sifre = value; // Şifreyi _sifre değişkeninde sakla
+    return null;
+  },
+  onSaved: (value) => _sifre = value!,
+),
+SizedBox(height: 10),
+TextFormField(
+  decoration: InputDecoration(
+    labelText: 'Şifre Tekrar',
+    border: OutlineInputBorder(),
+  ),
+  obscureText: true,
+  validator: (value) {
+    if (value!.isEmpty) return 'Şifre tekrarını giriniz';
+    if (value != _sifre) return 'Şifreler eşleşmiyor'; // Şifrelerin eşleşip eşleşmediğini kontrol et
+    return null;
+  },
+),
+
                               SizedBox(height: 10),
                               ElevatedButton(
                                 onPressed: () async {
@@ -150,13 +151,6 @@ class _KayitOlPageState extends State<KayitOlPage> {
                                           email: _email!,
                                           password: _sifre!,
                                         );
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                                "Kayıt başarılı Giriş yap sayfasına yönlendiriliyorsunuz: ${userCredential.user!.uid}"),
-                                          ),
-                                        );
 
                                         final CollectionReference
                                             kullanicilartable =
@@ -175,7 +169,7 @@ class _KayitOlPageState extends State<KayitOlPage> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  GirisYapPage()),
+                                                  Step2Page()),
                                         );
                                       } catch (e) {
                                         print("Kayıt hatası: $e");
@@ -201,7 +195,7 @@ class _KayitOlPageState extends State<KayitOlPage> {
                                     }
                                   }
                                 },
-                                child: Text('Kayıt Ol'),
+                                child: Text('Devam Et'),
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all(
                                       Colors.red.shade600),

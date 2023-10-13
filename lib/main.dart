@@ -1,3 +1,6 @@
+import 'package:evcildostum/kayitolscreen/kayitolpage.dart';
+import 'package:evcildostum/kayitolscreen/step2.dart';
+import 'package:evcildostum/navbar/navbar.dart';
 import 'package:evcildostum/tanitimscreens/pageview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
-      home: ScreensView(),
+       home: KayitOlPage(),
     );
   }
 }
