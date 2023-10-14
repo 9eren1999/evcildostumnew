@@ -4,7 +4,6 @@ List<IconData> menuIcons = [
   Icons.location_on,
   Icons.analytics_outlined,
   Icons.pets,
-  Icons.pets,
   Icons.assignment_add,
   Icons.near_me,
   Icons.settings,
@@ -13,11 +12,10 @@ List<IconData> menuIcons = [
 
 List<String> menuNames = [
   'Yakınımda',
-  'Kilo Takibi',
-  'Dostlarım',
   'Beslenme',
+  'Dostlarım',
   'Asistan',
   'İsim Önericisi',
-  'Ayarlar',
+  'Destek Merkezi',
   'Favorilerim',
 ];

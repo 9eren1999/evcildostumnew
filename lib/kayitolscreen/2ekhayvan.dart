@@ -9,14 +9,14 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:image_picker/image_picker.dart';
 
 
-class Step2Page extends StatefulWidget {
-  const Step2Page({super.key});
+class EkHayvanEklePage extends StatefulWidget {
+  const EkHayvanEklePage({super.key});
 
   @override
-  State<Step2Page> createState() => _Step2PageState();
+  State<EkHayvanEklePage> createState() => _EkHayvanEklePageState();
 }
 
-class _Step2PageState extends State<Step2Page> {
+class _EkHayvanEklePageState extends State<EkHayvanEklePage> {
   final _formKey = GlobalKey<FormState>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   String? _isim;
@@ -58,24 +58,32 @@ class _Step2PageState extends State<Step2Page> {
     User? currentUser = _auth.currentUser;
 
     // Firestore'a veri kaydet
-    final CollectionReference users = FirebaseFirestore.instance.collection('kullanicilartable');
+    final DocumentReference userDoc = FirebaseFirestore.instance.collection('kullanicilartable').doc(currentUser!.uid);
 
-// Yeni bir pet oluştur
-Map<String, dynamic> newPet = {
-  'imageUrl': imageUrl,
-  'name': _isim,
-  'dogum_tarihi': _dateController.text,
-  'cinsiyet': _selectedGender,
-  'tur': _selectedPetType,
-  'irk': _selectedBreed,
-  'kilo': _kilo,
-};
+    // Yeni bir pet oluştur
+    Map<String, dynamic> newPet = {
+      'imageUrl': imageUrl,
+      'name': _isim,
+      'dogum_tarihi': _dateController.text,
+      'cinsiyet': _selectedGender,
+      'tur': _selectedPetType,
+      'irk': _selectedBreed,
+      'kilo': _kilo,
+    };
 
-// Kullanıcının dokümanını güncelle ve yeni pet'i listeye ekle
-await users.doc(currentUser!.uid).update({
-  'pets': FieldValue.arrayUnion([newPet]),
-}).then((value) => print("Veri başarıyla kaydedildi"))
-  .catchError((error) => print("Veri kaydedilirken bir sorun oluştu: $error"));
+    DocumentSnapshot userData = await userDoc.get();
+
+    if (userData['pets2'] != null) {
+      // Eğer pets2 varsa, pets3'e kaydet
+      await userDoc.update({
+        'pets3': FieldValue.arrayUnion([newPet]),
+      });
+    } else {
+      // Eğer pets2 yoksa, pets2'ye kaydet
+      await userDoc.update({
+        'pets2': FieldValue.arrayUnion([newPet]),
+      });
+    }
 
     setState(() {
       showError = false;
@@ -96,18 +104,27 @@ await users.doc(currentUser!.uid).update({
 
 
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
           Align(
-            alignment: Alignment.topCenter,
-            child: Container( 
-              height: MediaQuery.of(context).size.height * 0.5,
-              color: Colors.red.shade600,
-            ),
-          ),
+  alignment: Alignment.topCenter,
+  child: Container(
+    height: MediaQuery.of(context).size.height * 0.5,
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        colors: [Colors.orange, Colors.amber],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomRight,
+      ),
+    ),
+  ),
+),
+
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
@@ -134,7 +151,7 @@ await users.doc(currentUser!.uid).update({
                                   children: <Widget>[
                                     SizedBox(height: 20),
                                     Text(
-                                        'Şimdi de evcil dostunun profilini oluşturalım. ',
+                                        'Diğer dostunu eklemek için bilgileri doldur. ',
                                         style: TextStyle(
                                             fontSize: 26,
                                             fontWeight: FontWeight.bold)),
@@ -370,9 +387,9 @@ if (_selectedGender != null)
                                      SizedBox(height: 20,), 
                                     ElevatedButton(
   onPressed: uploadImageAndSaveData, // Metodu buraya atayın
-  child: Text('Kaydı Tamamla'),
+  child: Text('Ekleme İşlemini Tamamla'),
   style: ButtonStyle(
-    backgroundColor: MaterialStateProperty.all(Colors.red.shade600),
+    backgroundColor: MaterialStateProperty.all(Colors.amber.shade600),
     shape: MaterialStateProperty.all(
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
     ),
