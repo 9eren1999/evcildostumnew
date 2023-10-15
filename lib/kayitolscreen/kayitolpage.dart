@@ -1,5 +1,5 @@
 import 'package:evcildostum/girisyapscreen/girisyappage.dart';
-import 'package:evcildostum/kayitolscreen/step2.dart';
+import 'package:evcildostum/kayitolscreen/dostunueklepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class _KayitOlPageState extends State<KayitOlPage> {
   String? _sifre;
   String? _isim;
   String? _soyisim;
-
+  bool _obscureText = true;
   bool _isLoading = false;
 
   @override
@@ -29,7 +29,7 @@ class _KayitOlPageState extends State<KayitOlPage> {
             alignment: Alignment.topCenter,
             child: Container(
               height: MediaQuery.of(context).size.height * 0.3,
-              color: Colors.red.shade600,
+              color: Colors.orange,
             ),
           ),
           Align(
@@ -39,16 +39,16 @@ class _KayitOlPageState extends State<KayitOlPage> {
               color: Colors.white10,
             ),
           ),
-          Center( 
+          Center(
             child: SingleChildScrollView(
-              child: Container( 
-                decoration: BoxDecoration( 
-                  border: Border.all(color: Colors.black12),
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.orange),
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
-                ), margin: EdgeInsets.only(top: 40, bottom: 40), 
+                ),
+                margin: EdgeInsets.only(top: 40, bottom: 40),
                 width: MediaQuery.of(context).size.width * 0.85,
-                
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: _isLoading
@@ -107,38 +107,52 @@ class _KayitOlPageState extends State<KayitOlPage> {
                               ),
                               SizedBox(height: 10),
                               TextFormField(
-  decoration: InputDecoration(
-      labelText: 'Şifre',
-      border: OutlineInputBorder()),
-  obscureText: true,
-  validator: (value) {
-    if (value!.isEmpty) return 'Şifre giriniz';
-    _sifre = value; // Şifreyi _sifre değişkeninde sakla
-    return null;
-  },
-  onSaved: (value) => _sifre = value!,
-),
-SizedBox(height: 10),
-TextFormField(
-  decoration: InputDecoration(
-    labelText: 'Şifre Tekrar',
-    border: OutlineInputBorder(),
-  ),
-  obscureText: true,
-  validator: (value) {
-    if (value!.isEmpty) return 'Şifre tekrarını giriniz';
-    if (value != _sifre) return 'Şifreler eşleşmiyor'; // Şifrelerin eşleşip eşleşmediğini kontrol et
-    return null;
-  },
-),
-
+                                decoration: InputDecoration(
+                                  labelText: 'Şifre',
+                                  border: OutlineInputBorder(),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      // Şifre gösteriliyorsa, "göz kapalı" ikonunu göster, aksi takdirde "göz açık" ikonunu göster
+                                      _obscureText
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _obscureText = !_obscureText;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                obscureText:
+                                    _obscureText, // Şifre metnini gizlemek veya göstermek için
+                                validator: (value) {
+                                  if (value!.isEmpty) return 'Şifre giriniz';
+                                  return null;
+                                },
+                                onSaved: (value) => _sifre = value!,
+                              ),
+                              SizedBox(height: 10),
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  labelText: 'Şifre Tekrar',
+                                  border: OutlineInputBorder(),
+                                ),
+                                obscureText: true,
+                                validator: (value) {
+                                  if (value!.isEmpty)
+                                    return 'Şifre tekrarını giriniz';
+                                  if (value != _sifre)
+                                    return 'Şifreler eşleşmiyor';
+                                  return null;
+                                },
+                              ),
                               SizedBox(height: 10),
                               ElevatedButton(
                                 onPressed: () async {
                                   if (_formKey.currentState!.validate()) {
                                     _formKey.currentState!.save();
 
-                                    //_email ve _sifrenin null olup olmadığını kontrol ediyoruz
                                     if (_email != null && _sifre != null) {
                                       setState(() {
                                         _isLoading = true;
@@ -197,8 +211,8 @@ TextFormField(
                                 },
                                 child: Text('Devam Et'),
                                 style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                      Colors.red.shade600),
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.orange),
                                   shape: MaterialStateProperty.all(
                                     RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(5)),
@@ -215,7 +229,9 @@ TextFormField(
                                 },
                                 child: Text(
                                   'Zaten Hesabın var mı? Giriş Yap',
-                                  style: TextStyle(color: Colors.red.shade600),
+                                  style: TextStyle(
+                                      color:
+                                          const Color.fromARGB(255, 1, 90, 4)),
                                 ),
                               ),
                             ],

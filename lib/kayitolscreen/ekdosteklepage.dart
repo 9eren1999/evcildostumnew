@@ -76,12 +76,10 @@ class _EkHayvanEklePageState extends State<EkHayvanEklePage> {
       DocumentSnapshot userData = await userDoc.get();
 
       if (userData['pets2'] != null) {
-        // Eğer pets2 varsa, pets3'e kaydet
         await userDoc.update({
           'pets3': FieldValue.arrayUnion([newPet]),
         });
       } else {
-        // Eğer pets2 yoksa, pets2'ye kaydet
         await userDoc.update({
           'pets2': FieldValue.arrayUnion([newPet]),
         });
@@ -93,7 +91,7 @@ class _EkHayvanEklePageState extends State<EkHayvanEklePage> {
 
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => NavBarPage(), // Yönlendirilecek sayfanın adı
+          builder: (context) => NavBarPage(),
         ),
       );
     } else {
@@ -204,9 +202,7 @@ class _EkHayvanEklePageState extends State<EkHayvanEklePage> {
                                 padding: const EdgeInsets.only(top: 8.0),
                                 child: Text(
                                   'Lütfen bir görsel yükleyin',
-                                  style: TextStyle(
-                                      color: Colors
-                                          .red), // Hata mesajı kırmızı renkte
+                                  style: TextStyle(color: Colors.red),
                                 ),
                               ),
                           ],
@@ -256,8 +252,7 @@ class _EkHayvanEklePageState extends State<EkHayvanEklePage> {
                               suffixText: 'Gram',
                               border: OutlineInputBorder()),
                           keyboardType: TextInputType.number,
-                          onSaved: (value) => _kilo =
-                              value!, // _kilo bir üye değişken olmalıdır.
+                          onSaved: (value) => _kilo = value!,
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Lütfen kiloyu girin';
@@ -377,8 +372,7 @@ class _EkHayvanEklePageState extends State<EkHayvanEklePage> {
                           height: 20,
                         ),
                         ElevatedButton(
-                          onPressed:
-                              uploadImageAndSaveData, // Metodu buraya atayın
+                          onPressed: uploadImageAndSaveData,
                           child: Text('Ekleme İşlemini Tamamla'),
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(

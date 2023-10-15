@@ -5,7 +5,6 @@ import 'package:evcildostum/tanitimscreens/screen3.dart';
 import 'package:evcildostum/tanitimscreens/screen4.dart';
 import 'package:flutter/material.dart';
 
-
 class WalkScreens extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -58,7 +57,6 @@ class _ScreensViewState extends State<ScreensView> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Geri butonu
                   TextButton(
                     style: TextButton.styleFrom(
                         foregroundColor: Colors.red.shade600),
@@ -73,9 +71,8 @@ class _ScreensViewState extends State<ScreensView> {
                     child: Text(
                       'Geri',
                       style: TextStyle(
-                          color: _currentPage == 0
-                              ? Colors.red.shade600
-                              : Colors.white),
+                          color:
+                              _currentPage == 0 ? Colors.orange : Colors.white),
                     ),
                   ),
                   Row(

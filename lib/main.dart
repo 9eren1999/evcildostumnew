@@ -17,8 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Evcil Dostum Uygulaması',
       theme: ThemeData(
           textTheme: ThemeData.light().textTheme.apply(
-                fontFamily:
-                    'SFProDisplay', // Diğer TextStyle özelliklerini de ekleyebilirsiniz.
+                fontFamily: 'SFProDisplay',
               )),
       home: ScreensView(),
     );

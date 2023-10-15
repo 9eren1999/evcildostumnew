@@ -1,5 +1,6 @@
-import 'package:evcildostum/anasayfascreen/anasayfapage.dart';
 import 'package:evcildostum/kayitolscreen/kayitolpage.dart';
+import 'package:evcildostum/navbar/navbar.dart';
+import 'package:evcildostum/sifresifirlamascreen/sifresifirlamapage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -16,6 +17,7 @@ class _GirisYapPageState extends State<GirisYapPage> {
   late String _email, _password;
   bool _rememberMe = false;
   bool _isLoading = false;
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class _GirisYapPageState extends State<GirisYapPage> {
             alignment: Alignment.topCenter,
             child: Container(
               height: screenSize.height * 0.5,
-              color: Colors.red.shade600,
+              color: Colors.orange,
             ),
           ),
           Align(
@@ -42,7 +44,7 @@ class _GirisYapPageState extends State<GirisYapPage> {
             child: SingleChildScrollView(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.red.shade600),
+                  border: Border.all(color: Colors.orange),
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -93,8 +95,22 @@ class _GirisYapPageState extends State<GirisYapPage> {
                                 decoration: InputDecoration(
                                   labelText: 'Şifre',
                                   border: OutlineInputBorder(),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      // Şifre gösteriliyorsa, "göz kapalı" ikonunu göster, aksi takdirde "göz açık" ikonunu göster
+                                      _obscureText
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _obscureText = !_obscureText;
+                                      });
+                                    },
+                                  ),
                                 ),
-                                obscureText: true,
+                                obscureText:
+                                    _obscureText, // Şifre metnini gizlemek veya göstermek için
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'Şifre giriniz';
@@ -124,18 +140,9 @@ class _GirisYapPageState extends State<GirisYapPage> {
                                       _isLoading = true;
                                     });
                                     try {
-                                      UserCredential userCredential =
-                                          await _auth
-                                              .signInWithEmailAndPassword(
+                                      await _auth.signInWithEmailAndPassword(
                                         email: _email,
                                         password: _password,
-                                      );
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                              "Giriş başarılı: ${userCredential.user!.uid}"),
-                                        ),
                                       );
                                       SharedPreferences prefs =
                                           await SharedPreferences.getInstance();
@@ -150,7 +157,7 @@ class _GirisYapPageState extends State<GirisYapPage> {
                                       Navigator.of(context).pushReplacement(
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  AnasayfaPage()));
+                                                  NavBarPage()));
                                     } catch (e) {
                                       print("Giriş hatası: $e");
                                       ScaffoldMessenger.of(context)
@@ -168,23 +175,31 @@ class _GirisYapPageState extends State<GirisYapPage> {
                                 },
                                 child: Text('Giriş Yap'),
                                 style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                      Colors.red.shade600),
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.orange),
                                   shape: MaterialStateProperty.all(
                                       RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(screenSize.width * 0.01))),
+                                          borderRadius: BorderRadius.circular(
+                                              screenSize.width * 0.01))),
                                 ),
                               ),
                               TextButton(
                                 onPressed: () async {
-                                  //... (kalan kodlar)
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            SifremiUnuttumPage()),
+                                  );
                                 },
-                                child: Text('Şifreni mi unuttun?'),
+                                child: Text('Şifreni mi unuttun?',
+                                    style: TextStyle(
+                                        color: const Color.fromARGB(
+                                            255, 1, 90, 4))),
                               ),
-                               Divider(
+                              Divider(
                                 height: screenSize.height * 0.002,
-                              ), 
+                              ),
                               TextButton(
                                 onPressed: () {
                                   Navigator.push(
@@ -193,7 +208,10 @@ class _GirisYapPageState extends State<GirisYapPage> {
                                         builder: (context) => KayitOlPage()),
                                   );
                                 },
-                                child: Text('Hesabın Yok mu? Kayıt Ol'),
+                                child: Text('Hesabın Yok mu? Kayıt Ol',
+                                    style: TextStyle(
+                                        color: const Color.fromARGB(
+                                            255, 1, 90, 4))),
                               ),
                             ],
                           ),

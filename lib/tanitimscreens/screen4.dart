@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class Screen4 extends StatefulWidget {
-  const Screen4({Key? key}) : super(key: key); // key parametresi düzeltilmiş
+  const Screen4({Key? key}) : super(key: key); 
 
   @override
   _Screen4State createState() => _Screen4State();
@@ -12,27 +12,25 @@ class _Screen4State extends State<Screen4> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red.shade600,
+      backgroundColor: Colors.orange,
       body: Padding(
         padding: const EdgeInsets.all(30.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(
-                height:
-                    50), 
+            SizedBox(height: 50),
             Expanded(
               flex: 2,
               child: Center(
                 child: Container(
-                  width: 310, 
-                  height: 350, 
+                  width: 310,
+                  height: 350,
                   child: Lottie.asset('assets/animations/wspage4.json'),
                 ),
               ),
             ),
             Expanded(
-              flex: 1, 
+              flex: 1,
               child: Column(
                 children: [
                   Text(
