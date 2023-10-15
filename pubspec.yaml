@@ -47,7 +47,6 @@ dependencies:
   google_fonts: ^6.1.0
   flutter_font_icons: ^2.2.5
   progress_border: ^0.1.2
-  geolocator: ^10.1.0
 
 dev_dependencies:
   flutter_test:
