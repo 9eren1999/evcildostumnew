@@ -1,56 +1,92 @@
 import 'package:evcildostum/anasayfascreen/anasayfapage.dart';
+import 'package:evcildostum/girisyapscreen/girisyappage.dart';
+import 'package:evcildostum/kayitolscreen/2ekhayvan.dart';
+import 'package:evcildostum/kayitolscreen/kayitolpage.dart';
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+
+// CustomNavBarWidget kodunuz buraya gelmeli.
 
 class NavBarPage extends StatefulWidget {
-  const NavBarPage({super.key});
+  const NavBarPage({Key? key}) : super(key: key);
 
   @override
   State<NavBarPage> createState() => _NavBarPageState();
 }
 
 class _NavBarPageState extends State<NavBarPage> {
-  int _selectedIndex = 2; 
+  PersistentTabController? _controller;
 
-  final List<Widget> pages = [
-    AnasayfaPage(),
-    AnasayfaPage(),  //bu sayfa isimleri güncellenirse kullanılabilir burası navbar.....:)
-    AnasayfaPage(),
-    AnasayfaPage(),
-    AnasayfaPage(),
-  ];
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: pages[_selectedIndex],
-        bottomNavigationBar: _selectedIndex == 5
-    ? null
-    : Container(
-        height: MediaQuery.of(context).size.height * 0.08, 
-        child: GNav(
-          gap: 7,
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-          iconSize: 25,
-          tabBackgroundColor: Color.fromARGB(15, 151, 64, 64),
-          backgroundColor: Color.fromARGB(255, 250, 250, 250),
-          color: Colors.black87,
-          textSize: 15,
-          activeColor: Colors.red.shade800,
-          tabs: const [
-            GButton(icon: Icons.library_add_rounded, text: "İlanlar"),
-            GButton(icon: Icons.forum_outlined, text: "Forum"),
-            GButton(icon: Icons.home_filled, text: "Anasayfa"),
-            GButton(icon: Icons.comment_rounded, text: "Bloglar"),
-            GButton(icon: Icons.location_on, text: "GPS Takip"),
-          ],
-          selectedIndex: _selectedIndex,
-          onTabChange: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
-        ),
-      ), );
+  void initState() {
+    super.initState();
+    _controller = PersistentTabController(initialIndex: 2);
+  }
 
+  List<Widget> _buildScreens() {
+    return [
+      KayitOlPage(),
+      GirisYapPage(),
+      AnasayfaPage(),
+      EkHayvanEklePage(),
+      AnasayfaPage(),
+    ];
+  }
+
+  List<PersistentBottomNavBarItem> _navBarsItems() {
+    return [
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.library_add_rounded, size: 21),
+        inactiveIcon: Icon(Icons.library_add_rounded, size: 21), // boyutu ayarladık
+        title: ("İlanlar"), 
+        activeColorPrimary: Colors.amber,
+        inactiveColorPrimary: Colors.grey.shade800,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.forum_outlined, size: 21),
+        inactiveIcon: Icon(Icons.forum_outlined, size: 21), // boyutu ayarladık
+        title: ("Forum"), 
+        activeColorPrimary: Colors.amber,
+        inactiveColorPrimary: Colors.grey.shade800,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.home_filled, size: 21),
+        inactiveIcon: Icon(Icons.home_filled, size: 21), // boyutu ayarladık
+        title: ("Anasayfa"),
+        activeColorPrimary: Colors.amber,
+        inactiveColorPrimary: Colors.grey.shade800,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.comment_rounded, size: 21),
+        inactiveIcon: Icon(Icons.comment_rounded, size: 21), // boyutu ayarladık
+        title: ("Bloglar"),
+        activeColorPrimary: Colors.amber,
+        inactiveColorPrimary: Colors.grey.shade800,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.location_on,  size: 21),
+        inactiveIcon: Icon(Icons.location_on,  size: 21), // boyutu ayarladık
+        title: ("GPS Takip"),
+        activeColorPrimary: Colors.amber,
+        inactiveColorPrimary: Colors.grey.shade800,
+      ),
+    ];
+  }
+
+   @override
+  Widget build(BuildContext context) {
+    return PersistentTabView(
+      context, // <-- Bu satırdaki değişiklik.
+      controller: _controller!,
+      screens: _buildScreens(),
+      items: _navBarsItems(),
+      confineInSafeArea: true,
+      handleAndroidBackButtonPress: true,
+      onItemSelected: (int) {
+        setState(() {}); // Yeni seçilen tab ile güncellemek için.
+      },
+      backgroundColor: Colors.white,
+      navBarStyle: NavBarStyle.style8, // Tarzı bu şekilde seçebilirsiniz.
+    );
   }
 }

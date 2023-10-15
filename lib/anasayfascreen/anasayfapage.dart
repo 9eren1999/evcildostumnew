@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evcildostum/anasayfascreen/categories.dart';
-import 'package:progress_border/progress_border.dart';
 import 'package:evcildostum/kayitolscreen/2ekhayvan.dart';
 import 'package:flutter/material.dart';
 
@@ -70,6 +69,8 @@ Future<DocumentSnapshot> getUserInfo() async {
     return 'Yeni doğan';
   }
 }
+
+
 
 
   @override
@@ -192,10 +193,10 @@ child: ScrollConfiguration(
           ),  
   ]),Positioned(
   top: MediaQuery.of(context).size.height * 0.12,
-  left: 20,
-  right: 20,
+  left: 45,
+  right: 45,
   child: Container(
-    height: 245,
+    height: 230,
     decoration: BoxDecoration(
       color: Colors.white, 
       borderRadius: BorderRadius.circular(20),
@@ -225,7 +226,7 @@ child: ScrollConfiguration(
       Text("Evcil Dostlarım",
           style: TextStyle(
               fontWeight: FontWeight.w700,
-              fontSize: 18,
+              fontSize: 15,
               color: Colors.grey.shade800)),
       IconButton(
         icon: Icon(Icons.add_circle, size: 24, color: Colors.grey.shade800,),
@@ -241,7 +242,7 @@ child: ScrollConfiguration(
 ),
 
     Container(
-  height: 95,
+  height: 90,
   child: ListView.builder(
     scrollDirection: Axis.horizontal,
     itemCount: petsKeys.length,
@@ -249,50 +250,51 @@ child: ScrollConfiguration(
       var petsList = userInfo[petsKeys[index]] as List<dynamic>? ?? [];
 
       return petsList.isEmpty
-          ? Container() // Eğer pet listesi boşsa, boş bir konteyner döndür
-          : GestureDetector(
-              onTap: () {
-                setState(() {
-                  selectedPetIndex = index;
-                });
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: Container(
-                  child: Column(
-                    children: [
-                      Container(
-                        width: selectedPetIndex == index ? 70 : 50, // Seçilen görsel için genişlik
-                        height: selectedPetIndex == index ? 70 : 50, // Seçilen görsel için yükseklik
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: (selectedPetIndex == index)
-                              ? ProgressBorder.all(
-                                  color: Colors.orange[300]!,
-                                  width: 3,
-                                  progress: 100,
-                                )
-                              : null,
-                        ),
-                        child: CircleAvatar(
-                          radius: selectedPetIndex == index ? 40 : 28, // Seçilen görsel için yarıçap
-                          backgroundImage:
-                              NetworkImage(petsList[0]['imageUrl']),
-                        ),
-                      ),
-                      SizedBox(height: 7),
-                      Text(
-                        '${petsList[0]['name']}',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 12,
-                            color: Colors.grey.shade800),
-                      ),
-                    ],
+    ? Container() // Eğer pet listesi boşsa, boş bir konteyner döndür
+    : GestureDetector(
+  onTap: () {
+    setState(() {
+      selectedPetIndex = index; // Seçilen evcil hayvanın indexini güncelliyoruz.
+    });
+  },
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 300),
+            curve: Curves.easeInOut, // Animasyonun düzgün bir geçiş yapması için eklendi
+            child: Column(
+              children: [
+                Container(
+                  width: selectedPetIndex == index ? 65 : 45,
+                  height: selectedPetIndex == index ? 65 : 45,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: (selectedPetIndex == index)
+                        ? Border.all(
+                            color: Colors.orange[300]!,
+                            width: 3,
+                          )
+                        : null,
                   ),
-                ),
-              ),
-            );
+            child: CircleAvatar(
+              radius: selectedPetIndex == index ? 40 : 28,
+              backgroundImage: NetworkImage(petsList[0]['imageUrl']),
+            ),
+          ),
+          SizedBox(height: 7),
+          Text(
+            '${petsList[0]['name']}',
+            style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 11,
+                color: Colors.grey.shade800),
+          ),
+        ],
+      ),
+    ),
+  ),
+);
+
     },
   ),
 ),
@@ -306,15 +308,15 @@ child: ScrollConfiguration(
                     children: [
                      Column(
   children: [
-    Image.asset('assets/images/yas.png', cacheHeight: 35, cacheWidth: 35,), 
+    Image.asset('assets/images/yas.png', cacheHeight: 30, cacheWidth: 30,), 
     SizedBox(height: 5,),
     Container(
-      width: 80, // Sabit bir genişlik atandı
+      width: 70, // Sabit bir genişlik atandı
       child: Text(
         calculateAge('${userInfo[petsKeys[selectedPetIndex]][0]['dogum_tarihi']}'), 
         style: TextStyle(
           fontWeight: FontWeight.w500,
-          fontSize: 13,
+          fontSize: 12,
           color: Colors.grey.shade800
         ),
         textAlign: TextAlign.center, // Metni ortalamak için
@@ -326,15 +328,15 @@ child: ScrollConfiguration(
 
                       Column(
   children: [
-    Image.asset('assets/images/weight.png', cacheHeight: 35, cacheWidth: 35,), 
+    Image.asset('assets/images/weight.png', cacheHeight: 30, cacheWidth: 30,), 
     SizedBox(height: 5,),
     Container(
-      width: 80, // Sabit bir genişlik atandı
+      width: 70, // Sabit bir genişlik atandı
       child: Text(
         '${userInfo[petsKeys[selectedPetIndex]][0]['kilo']} Gr', 
         style: TextStyle(
           fontWeight: FontWeight.w500,
-          fontSize: 13,
+          fontSize: 12,
           color: Colors.grey.shade800
         ),
         textAlign: TextAlign.center, // Metni ortalamak için
@@ -345,14 +347,14 @@ child: ScrollConfiguration(
 
                       Column(
   children: [
-    Image.asset('assets/images/irk.png', cacheHeight: 35, cacheWidth: 35,), 
+    Image.asset('assets/images/irk.png', cacheHeight: 30, cacheWidth: 30,), 
     SizedBox(height: 5,),
     Container(
-      width: 80, // Sabit bir genişlik atandı
+      width: 70, // Sabit bir genişlik atandı
       child: Text('${userInfo[petsKeys[selectedPetIndex]][0]['irk']}', 
         style: TextStyle(
           fontWeight: FontWeight.w500,
-          fontSize: 13,
+          fontSize: 12,
           color: Colors.grey.shade800
         ),
         textAlign: TextAlign.center, // Metni ortalamak için
@@ -363,14 +365,14 @@ child: ScrollConfiguration(
 
                      Column(
   children: [
-    Image.asset('assets/images/gender.png', cacheHeight: 35, cacheWidth: 35,), 
+    Image.asset('assets/images/gender.png', cacheHeight: 30, cacheWidth: 30,), 
     SizedBox(height: 5,),
     Container(
-      width: 80, // Sabit bir genişlik atandı
+      width: 70, // Sabit bir genişlik atandı
       child: Text('${userInfo[petsKeys[selectedPetIndex]][0]['cinsiyet']}', 
         style: TextStyle(
           fontWeight: FontWeight.w500,
-          fontSize: 13,
+          fontSize: 12,
           color: Colors.grey.shade800
         ),
         textAlign: TextAlign.center, // Metni ortalamak için
