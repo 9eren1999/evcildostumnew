@@ -17,6 +17,7 @@ class _IcerikDetayPageState extends State<IcerikDetayPage> {
   @override
   Widget build(BuildContext context) {
   return Scaffold(
+    appBar: AppBar(backgroundColor: const Color.fromARGB(0, 0, 0, 0), toolbarHeight: 0,),
     body: FutureBuilder<DocumentSnapshot>(
       future: collectionRef.doc(widget.documentId).get(),
       builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
@@ -43,8 +44,8 @@ class _IcerikDetayPageState extends State<IcerikDetayPage> {
 
     // Geri Düğmesi
     Positioned(
-  top: 35, // Düğmenin yukarıdan konumu
-  left: 11, // Düğmenin soldan konumu
+  top: 20, // Düğmenin yukarıdan konumu
+  left: 12, // Düğmenin soldan konumu
   child: Container( 
     width: 40,
     height: 40,
@@ -81,7 +82,7 @@ class _IcerikDetayPageState extends State<IcerikDetayPage> {
                       controller: PrimaryScrollController.of(context) ?? myscrollController, // PrimaryScrollController kullanımı
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 26, right: 26, bottom: 10, top: 2),
+                          padding: const EdgeInsets.only(left: 26, right: 26, bottom: 10, top: 25),
                           child: Text(
                             data['baslik'],
                             style: TextStyle(fontSize: 21, fontWeight: FontWeight.w700, color: Colors.blueGrey.shade900),

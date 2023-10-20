@@ -2,6 +2,7 @@ import 'package:evcildostum/navbar/navbar.dart';
 import 'package:evcildostum/tanitimscreens/pageview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +14,10 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarIconBrightness: Brightness.light, // Navigasyon çubuğu ikonları için parlaklık
+      statusBarIconBrightness: Brightness.light, // Durum çubuğu ikonları için parlaklık
+    ));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Evcil Dostum Uygulaması',
