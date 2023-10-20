@@ -177,7 +177,6 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
         Expanded(
           flex: 6,
           child: Container(
-            color: Color.fromARGB(238, 240, 240, 240),
             child: ScrollConfiguration(
               behavior: MyScrollBehavior(),
               child: Padding(

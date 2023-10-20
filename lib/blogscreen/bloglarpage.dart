@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:evcildostum/blogscreen/blogdetaypage.dart';
 import 'package:flutter/material.dart';
 
 class BloglarPage extends StatefulWidget {
@@ -16,10 +17,10 @@ class _BloglarPageState extends State<BloglarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Bloglar'),
+      appBar: AppBar( 
+        title: Text('Evcil Dostum Blog'),
       ),
-      body: Column(
+      body: Column( 
         children: [
           FutureBuilder<DocumentSnapshot>(
             future: tagsRef.doc('jzOhXK8B0yTJ3SIAtkGH').get(),
@@ -63,25 +64,34 @@ class _BloglarPageState extends State<BloglarPage> {
             },
           ),
           Expanded(
-            child: StreamBuilder<QuerySnapshot>(
-              stream: collectionRef.snapshots(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) return CircularProgressIndicator();
+  child: StreamBuilder<QuerySnapshot>(
+    stream: collectionRef.snapshots(),
+    builder: (context, snapshot) {
+      if (!snapshot.hasData) return CircularProgressIndicator();
 
-                return ListView(
-                  children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                    Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+      return ListView(
+        children: snapshot.data!.docs.map((DocumentSnapshot document) {
+          Map<String, dynamic> data = document.data() as Map<String, dynamic>;
 
-                    if (selectedTag != null && data['tags'] != selectedTag) return Container();
+          List<String> tagsList = (data['tags'] as String).split(', '); // Virgülle ayrılmış stringi listeye dönüştür
 
-                    return Padding(
+          if (selectedTag != null && !tagsList.contains(selectedTag)) return Container(); // Seçilen etiketi içermeyen gönderileri filtrele
+
+          return Padding(
   padding: const EdgeInsets.all(12.0),
-  child: InkWell(
-    onTap: () {
-      // Card'a tıklandığında gerçekleştirilecek aksiyon
-    },
-    child: Card(
-      elevation: 2,
+  // Bloglar sayfasında, ListView içindeki her bir gönderi için
+child: GestureDetector(
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => IcerikDetayPage(documentId: document.id), // document.id ile gönderinin ID'sini alıyoruz
+      ),
+    );
+  },
+  child: 
+Card(
+      elevation:1,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
@@ -99,7 +109,7 @@ class _BloglarPageState extends State<BloglarPage> {
             padding: const EdgeInsets.only(right: 13, top: 7, left: 15, bottom: 7),
             child: Text(
               data['baslik'],
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.grey.shade900),
             ),
           ),
           Padding(
@@ -109,18 +119,24 @@ class _BloglarPageState extends State<BloglarPage> {
               children: [
                 Text(
                   data['yazi'],
-                  maxLines: 2,
+                  maxLines: 2, 
                   overflow: TextOverflow.ellipsis,
+                  style: TextStyle(color: Colors.grey.shade900,),
                 ),
                 Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {
-                      // Devamını oku düğmesine tıklandığında gerçekleştirilecek aksiyon
-                    },
-                    child: Text("Devamını Oku..."),
-                  ),
-                ),
+  alignment: Alignment.centerRight,
+  child: TextButton(
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => IcerikDetayPage(documentId: document.id), // document.id ile gönderinin ID'sini alıyoruz
+        ),
+      );
+    },
+    child: Text("Devamını Oku..."),
+  ),
+)
               ],
             ),
           ),
