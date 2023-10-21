@@ -112,7 +112,6 @@ class _KayitOlPageState extends State<KayitOlPage> {
                                   border: OutlineInputBorder(),
                                   suffixIcon: IconButton(
                                     icon: Icon(
-                                      // Şifre gösteriliyorsa, "göz kapalı" ikonunu göster, aksi takdirde "göz açık" ikonunu göster
                                       _obscureText
                                           ? Icons.visibility_off
                                           : Icons.visibility,
@@ -124,13 +123,12 @@ class _KayitOlPageState extends State<KayitOlPage> {
                                     },
                                   ),
                                 ),
-                                obscureText:
-                                    _obscureText, // Şifre metnini gizlemek veya göstermek için
+                                obscureText: _obscureText,
                                 validator: (value) {
                                   if (value!.isEmpty) return 'Şifre giriniz';
                                   return null;
                                 },
-                                onSaved: (value) => _sifre = value!,
+                                onSaved: (value) => _sifre = value,
                               ),
                               SizedBox(height: 10),
                               TextFormField(
