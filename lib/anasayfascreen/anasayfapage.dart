@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evcildostum/anasayfascreen/menuikonlari.dart';
+import 'package:evcildostum/desteksistemiscreen/desteksistemipage.dart';
 import 'package:evcildostum/isimonericiscreen/isimonericipage.dart';
 import 'package:progress_border/progress_border.dart';
 import 'package:evcildostum/kayitolscreen/ekdosteklepage.dart';
@@ -56,6 +57,12 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => IsimOnericiPage()),
+        );
+        break;
+      case 5:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DestekSistemiPage()),
         );
         break;
 
