@@ -66,19 +66,31 @@ class _IcerikDetayPageState extends State<IcerikDetayPage> {
 ),
 
               DraggableScrollableSheet(
-                initialChildSize: 0.68,
-                minChildSize: 0.68,
-                maxChildSize: 0.68,
-                builder: (BuildContext context, myscrollController) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(25),
-                        topRight: Radius.circular(25),
-                      ),
-                    ),
-                    child: ListView(
+  initialChildSize: 0.64,
+  minChildSize: 0.64,
+  maxChildSize: 0.64,
+  builder: (BuildContext context, myscrollController) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(25),
+          topRight: Radius.circular(25),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.3), // Gölgenin rengi
+            spreadRadius: 2, // Gölgenin yayılma yarıçapı
+            blurRadius: 5, // Gölgenin bulanıklık yarıçapı
+            offset: Offset(0, -6), // Gölgenin x ve y offset değerleri
+          ),
+        ],
+        border: Border.all(
+          color: Colors.grey, // Kenarlığın rengi
+          width: 0.5, // Kenarlığın kalınlığı
+        ),
+      ),
+      child: ListView(
                       controller: PrimaryScrollController.of(context) ?? myscrollController, // PrimaryScrollController kullanımı
                       children: [
                         Padding(

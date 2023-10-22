@@ -18,7 +18,7 @@ class _BloglarPageState extends State<BloglarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar( 
-        title: Text('Evcil Dostum Blog'),
+        title: Text('Evcil Dostum Blog', style: TextStyle( fontWeight: FontWeight.w800)),
       ),
       body: Column( 
         children: [
@@ -44,7 +44,7 @@ class _BloglarPageState extends State<BloglarPage> {
                       child: Padding( 
                         padding: const EdgeInsets.symmetric( vertical: 8.0),
                         child: Card(
-                          color: isSelected ? Colors.blue : Colors.orange, // Seçilen kategori mavi, diğerleri turuncu
+                          color: isSelected ? Colors.orange : Colors.white, // Seçilen kategori mavi, diğerleri turuncu
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10), // Kartın köşelerini yuvarla
                           ),
@@ -52,7 +52,7 @@ class _BloglarPageState extends State<BloglarPage> {
                             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 7.0),
                             child: Text(  
                               tag,
-                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                              style: TextStyle(color:isSelected ? Colors.white : Colors.grey.shade800,),
                             ),
                           ),
                         ),
@@ -123,28 +123,40 @@ Card(
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(color: Colors.grey.shade900,),
                 ),
-                Align(
-  alignment: Alignment.centerRight,
-  child: TextButton(
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => IcerikDetayPage(documentId: document.id), // document.id ile gönderinin ID'sini alıyoruz
-        ),
-      );
-    },
-    child: Text("Devamını Oku..."),
-  ),
-)
+                Padding(
+            padding: const EdgeInsets.only(left: 3, bottom: 10),
+            child: Row(
+              children: [
+                Icon(Icons.remove_red_eye_rounded, color: Colors.grey.shade700, size: 16), // Göz ikonu
+                SizedBox(width: 5), // İkon ile sayı arasında boşluk
+                Text(
+                  "${data['goruntulenme']}", // Görüntülenme sayısı
+                  style: TextStyle(color: Colors.grey.shade700, fontSize: 12),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => IcerikDetayPage(documentId: document.id),
+                          ),
+                        );
+                      },
+                      child: Text("Devamını Oku...", style: TextStyle(color: Colors.orange)),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
         ],
       ),
     ),
-  ),
-);
+         ] ),
+)));
             }).toList(),
           );
         },
