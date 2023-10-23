@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class Screen4 extends StatefulWidget {
-  const Screen4({Key? key}) : super(key: key); 
+  const Screen4({Key? key}) : super(key: key);
 
   @override
   _Screen4State createState() => _Screen4State();
@@ -43,7 +43,7 @@ class _Screen4State extends State<Screen4> {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    'RGX PRO tasmalar ile evcil dostunun konumunu dilediğin yerden kesintisiz takip et!',
+                    'Evcil Dostum "İz İzleyici" tasmalar ile evcil dostunun konumunu dilediğin yerden kesintisiz takip et!',
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Color.fromARGB(239, 255, 255, 255)),
                   ),

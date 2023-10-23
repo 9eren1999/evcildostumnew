@@ -1,5 +1,3 @@
-import 'package:evcildostum/ilanlarscreen/esaramailanekle.dart';
-import 'package:evcildostum/ilanlarscreen/ilansecpage.dart';
 import 'package:evcildostum/ilanlarscreen/esaramapage.dart';
 import 'package:evcildostum/ilanlarscreen/kayipilanpage.dart';
 import 'package:evcildostum/ilanlarscreen/sahiplendirmeilanpage.dart';
@@ -15,30 +13,28 @@ class IlanlarPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: GridView.count(  
+        child: GridView.count(
           crossAxisCount: 1,
-          childAspectRatio: 2.5,  mainAxisSpacing: 7,
+          childAspectRatio: 2.5,
+          mainAxisSpacing: 7,
           children: [
-           _buildGridTile(
-  context,
-  'assets/images/kayip.png',
-  'Kayıp İlanları',
-  KayipIlanPage(), // Burada doğrudan hedef sayfanın widget'ını geçiriyoruz.
-),
-
             _buildGridTile(
-  context,
-  'assets/images/esarama.png',
-  'Eş Arama İlanları',
-  EsAramaPage(), // Burada doğrudan hedef sayfanın widget'ını geçiriyoruz.
-),
-
+              context,
+              'assets/images/kayip.png',
+              'Kayıp İlanları',
+              KayipIlanPage(),
+            ),
             _buildGridTile(
-  context,
-  'assets/images/sahiplendirme.png',
-  'Sahiplendirme İlanları',
-  SahiplendirmeIlanPage(), // Burada doğrudan hedef sayfanın widget'ını geçiriyoruz.
-
+              context,
+              'assets/images/esarama.png',
+              'Eş Arama İlanları',
+              EsAramaPage(),
+            ),
+            _buildGridTile(
+              context,
+              'assets/images/sahiplendirme.png',
+              'Sahiplendirme İlanları',
+              SahiplendirmeIlanPage(),
             ),
           ],
         ),
@@ -46,54 +42,53 @@ class IlanlarPage extends StatelessWidget {
     );
   }
 
-  Widget _buildGridTile(BuildContext context, String imagePath, String label, Widget page) {
-  return GestureDetector(
-    onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => page, // Burada doğrudan hedef sayfanın widget'ını kullanıyoruz.
-        ),
-      );
-    },
-    child: Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Image.asset(
-              imagePath,
-              fit: BoxFit.cover,
-            ),
+  Widget _buildGridTile(
+      BuildContext context, String imagePath, String label, Widget page) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => page,
           ),
-          Positioned(
-            left: 15,
-            bottom: 15,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              decoration: BoxDecoration(
-                color: Colors.orange.shade400.withOpacity(0.85),
-                borderRadius: BorderRadius.circular(15),
+        );
+      },
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset(
+                imagePath,
+                fit: BoxFit.cover,
               ),
-              child: Text(
-                label,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
+            ),
+            Positioned(
+              left: 15,
+              bottom: 15,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                decoration: BoxDecoration(
+                  color: Colors.orange.shade400.withOpacity(0.85),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Text(
+                  label,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-  );
-}
-
+    );
   }
-
+}

@@ -57,12 +57,10 @@ class _EkHayvanEklePageState extends State<EkHayvanEklePage> {
 
       User? currentUser = _auth.currentUser;
 
-      // Firestore'a veri kaydet
       final DocumentReference userDoc = FirebaseFirestore.instance
           .collection('kullanicilartable')
           .doc(currentUser!.uid);
 
-      // Yeni bir pet oluştur
       Map<String, dynamic> newPet = {
         'imageUrl': imageUrl,
         'name': _isim,
@@ -392,9 +390,12 @@ class _EkHayvanEklePageState extends State<EkHayvanEklePage> {
           ),
           Positioned(
             top: MediaQuery.of(context).size.height * 0.05,
-            left: MediaQuery.of(context).size.width * 0.005,
+            left: MediaQuery.of(context).size.width * 0.001,
             child: IconButton(
-              icon: Icon(Icons.arrow_back_ios_new_rounded),
+              icon: Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: Colors.white,
+              ),
               onPressed: () => Navigator.pop(context),
             ),
           )

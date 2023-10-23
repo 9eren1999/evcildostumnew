@@ -58,18 +58,17 @@ class _DestekSistemiPageState extends State<DestekSistemiPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                          width: 150, // veya ihtiyacınız olan başka bir değer
-                          height: 150, // veya ihtiyacınız olan başka bir değer
+                          width: 150,
+                          height: 150,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Colors
-                                .white, // veya ihtiyacınız olan başka bir renk
+                            color: Colors.white,
                           ),
                           child: ClipOval(
                             child: Image.asset(
                               'assets/images/desteksistemiasset.png',
                               fit: BoxFit
-                                  .fitHeight, // Resmi container'a sığacak şekilde ayarlar
+                                  .fitHeight, //resmi containera sığacak şekilde ayarlıyo
                             ),
                           ),
                         ),
@@ -82,12 +81,11 @@ class _DestekSistemiPageState extends State<DestekSistemiPage> {
                               AsyncSnapshot<DocumentSnapshot> snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
-                              return CircularProgressIndicator(); // Yükleniyor göstergesi
+                              return CircularProgressIndicator();
                             }
 
                             if (!snapshot.hasData || snapshot.data == null) {
-                              return Text(
-                                  "Kullanıcı bilgisi yüklenemedi."); // Veri yok mesajı
+                              return Text("Kullanıcı bilgisi yüklenemedi.");
                             }
 
                             Map<String, dynamic> data =
@@ -95,7 +93,7 @@ class _DestekSistemiPageState extends State<DestekSistemiPage> {
                             if (data['isim'] == null ||
                                 data['soyisim'] == null) {
                               return Text(
-                                  "Kullanıcı ismi veya soyismi mevcut değil."); // isim veya soyisim yoksa
+                                  "Kullanıcı ismi veya soyismi mevcut değil.");
                             }
 
                             return Column(
@@ -167,8 +165,6 @@ class _DestekSistemiPageState extends State<DestekSistemiPage> {
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
-
-                              // Kullanıcı bilgilerini al
                               DocumentSnapshot userDoc =
                                   await kullanicilarTable.doc(user?.uid).get();
                               Map<String, dynamic> userData =
@@ -209,6 +205,17 @@ class _DestekSistemiPageState extends State<DestekSistemiPage> {
                   ),
                 ),
               ),
+            ),
+          ),
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.05,
+            left: MediaQuery.of(context).size.width * 0.005,
+            child: IconButton(
+              icon: Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: Colors.white,
+              ),
+              onPressed: () => Navigator.pop(context),
             ),
           ),
         ],

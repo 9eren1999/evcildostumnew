@@ -99,8 +99,7 @@ class _SifremiUnuttumPageState extends State<SifremiUnuttumPage> {
                                             actions: <Widget>[
                                               TextButton(
                                                 onPressed: () {
-                                                  Navigator.of(context)
-                                                      .pop(); // Diyalog penceresini kapat
+                                                  Navigator.of(context).pop();
                                                 },
                                                 child: Text('Tamam'),
                                               ),
@@ -129,8 +128,7 @@ class _SifremiUnuttumPageState extends State<SifremiUnuttumPage> {
                                             actions: <Widget>[
                                               TextButton(
                                                 onPressed: () {
-                                                  Navigator.of(context)
-                                                      .pop(); 
+                                                  Navigator.of(context).pop();
                                                 },
                                                 child: Text('Tamam'),
                                               ),

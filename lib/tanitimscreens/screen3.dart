@@ -37,8 +37,8 @@ class _Screen3State extends State<Screen3> {
               flex: 2,
               child: Center(
                 child: Container(
-                  width: 230, // Genişliği
-                  height: 250, // Yüksekliği
+                  width: 230,
+                  height: 250,
                   child: Lottie.asset('assets/animations/wspage3.json'),
                 ),
               ),

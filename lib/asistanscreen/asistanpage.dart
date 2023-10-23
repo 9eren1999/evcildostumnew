@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class KonumTakibiPage extends StatelessWidget {
-  const KonumTakibiPage({super.key});
+class AsistanPage extends StatelessWidget {
+  const AsistanPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Text(
-          "Burası GPS Takip Sayfası",
+          "Burası Asistan Sayfası",
           style: TextStyle(fontSize: 25),
         ),
       ),

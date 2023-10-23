@@ -97,7 +97,6 @@ class _GirisYapPageState extends State<GirisYapPage> {
                                   border: OutlineInputBorder(),
                                   suffixIcon: IconButton(
                                     icon: Icon(
-                                      // Şifre gösteriliyorsa, "göz kapalı" ikonunu göster, aksi takdirde "göz açık" ikonunu göster
                                       _obscureText
                                           ? Icons.visibility_off
                                           : Icons.visibility,
@@ -109,8 +108,7 @@ class _GirisYapPageState extends State<GirisYapPage> {
                                     },
                                   ),
                                 ),
-                                obscureText:
-                                    _obscureText, // Şifre metnini gizlemek veya göstermek için
+                                obscureText: _obscureText,
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'Şifre giriniz';

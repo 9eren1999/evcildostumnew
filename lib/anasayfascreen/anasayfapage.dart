@@ -1,7 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evcildostum/anasayfascreen/menuikonlari.dart';
+import 'package:evcildostum/asistanscreen/asistanpage.dart';
+import 'package:evcildostum/ayarlarscreen/ayarlarpage.dart';
+import 'package:evcildostum/beslenmescreen/beslenmepage.dart';
+import 'package:evcildostum/bildirimlerscreen/bildirimlerpage.dart';
 import 'package:evcildostum/desteksistemiscreen/desteksistemipage.dart';
+import 'package:evcildostum/dostlarimscreen/dostlarimpage.dart';
+import 'package:evcildostum/favorilerimscreen/favorilerimpage.dart';
 import 'package:evcildostum/isimonericiscreen/isimonericipage.dart';
+import 'package:evcildostum/profilscreen/profilpage.dart';
+import 'package:evcildostum/yakinimdascreen/yakinimdapage.dart';
 import 'package:progress_border/progress_border.dart';
 import 'package:evcildostum/kayitolscreen/ekdosteklepage.dart';
 import 'package:flutter/material.dart';
@@ -32,25 +40,25 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
       case 0:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => IsimOnericiPage()),
+          MaterialPageRoute(builder: (context) => YakinimdaPage()),
         );
         break;
       case 1:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => IsimOnericiPage()),
+          MaterialPageRoute(builder: (context) => BeslenmePage()),
         );
         break;
       case 2:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => IsimOnericiPage()),
+          MaterialPageRoute(builder: (context) => DostlarimPage()),
         );
         break;
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => IsimOnericiPage()),
+          MaterialPageRoute(builder: (context) => AsistanPage()),
         );
         break;
       case 4:
@@ -63,6 +71,12 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => DestekSistemiPage()),
+        );
+        break;
+      case 6:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => FavorilerimPage()),
         );
         break;
 
@@ -137,41 +151,75 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(Icons.person, color: Colors.white),
-                                SizedBox(width: 8),
-                                Text(
-                                  '${userInfo['isim']} ${userInfo['soyisim']}',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ProfilPage()),
+                                      );
+                                    },
+                                    highlightColor: Colors.transparent,
+                                    splashColor: Colors.transparent,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.person,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(width: 8),
+                                          Text(
+                                            '${userInfo['isim']} ${userInfo['soyisim']}',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.notifications,
-                                      color: Colors.white),
-                                  onPressed: () {
-                                    //bildirim ekranına gidecek
-                                  },
-                                ),
-                                IconButton(
-                                  icon:
-                                      Icon(Icons.settings, color: Colors.white),
-                                  onPressed: () {
-                                    //ayarlar ekranına gidecek
-                                  },
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    icon: Icon(Icons.notifications,
+                                        color: Colors.white),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                BildirimlerPage()),
+                                      );
+                                    },
+                                  ),
+                                  IconButton(
+                                    icon: Icon(Icons.settings,
+                                        color: Colors.white),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                AyarlarPage()),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),

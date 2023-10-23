@@ -65,7 +65,7 @@ class _EsAramaIlanEklePageState extends State<EsAramaIlanEklePage> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        // Evcil hayvan seçildiğinde yapılacak işlemler
+                        //hayvan seçildiğinde yapılacak işlemler
                       },
                       child: Column(
                         children: [

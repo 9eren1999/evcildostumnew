@@ -1,24 +1,20 @@
 import 'package:evcildostum/anasayfascreen/anasayfapage.dart';
 import 'package:evcildostum/blogscreen/bloglarpage.dart';
-import 'package:evcildostum/girisyapscreen/girisyappage.dart';
+import 'package:evcildostum/forumscreen/forumpage.dart';
 import 'package:evcildostum/ilanlarscreen/ilansecpage.dart';
-import 'package:evcildostum/kayitolscreen/kayitolpage.dart';
+import 'package:evcildostum/konumtakibiscreen/konumtakibipage.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 class NavBarPage extends StatefulWidget {
   final bool hideNavBar;
-  
-  const NavBarPage({Key? key, this.hideNavBar = false}) : super(key: key); // Varsayılan değeri false olarak ayarlayın
-  
+
+  const NavBarPage({Key? key, this.hideNavBar = false})
+      : super(key: key); 
 
   @override
   State<NavBarPage> createState() => _NavBarPageState();
 }
-
-
-
-
 
 class _NavBarPageState extends State<NavBarPage> {
   PersistentTabController? _controller;
@@ -29,15 +25,13 @@ class _NavBarPageState extends State<NavBarPage> {
     _controller = PersistentTabController(initialIndex: 2);
   }
 
-  
-
   List<Widget> _buildScreens() {
     return [
       IlanlarPage(),
-      GirisYapPage(),
+      ForumPage(),
       AnasayfaPage(),
       BloglarPage(),
-      AnasayfaPage(),
+      KonumTakibiPage(),
     ];
   }
 
@@ -81,21 +75,21 @@ class _NavBarPageState extends State<NavBarPage> {
     ];
   }
 
- @override
-Widget build(BuildContext context) {
-  return PersistentTabView(
-    context,
-    controller: _controller!,
-    screens: _buildScreens(),
-    items: _navBarsItems(),
-    confineInSafeArea: true,
-    handleAndroidBackButtonPress: true,
-    onItemSelected: (int) {
-      setState(() {});
-    },
-    backgroundColor: Colors.white,
-    navBarStyle: NavBarStyle.style8,
-    hideNavigationBar: widget.hideNavBar, 
-  );
-}
+  @override
+  Widget build(BuildContext context) {
+    return PersistentTabView(
+      context,
+      controller: _controller!,
+      screens: _buildScreens(),
+      items: _navBarsItems(),
+      confineInSafeArea: true,
+      handleAndroidBackButtonPress: true,
+      onItemSelected: (int) {
+        setState(() {});
+      },
+      backgroundColor: Colors.white,
+      navBarStyle: NavBarStyle.style8,
+      hideNavigationBar: widget.hideNavBar,
+    );
+  }
 }
