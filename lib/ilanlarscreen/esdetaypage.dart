@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class IlanDetayScreen extends StatelessWidget {
+class EsDetayScreen extends StatelessWidget {
   final String documentId; // İlanın belge ID'si
 
-  IlanDetayScreen({required this.documentId});
+  EsDetayScreen({required this.documentId});
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference ilanlar = FirebaseFirestore.instance.collection('kayipilantable');
+    CollectionReference ilanlar = FirebaseFirestore.instance.collection('esaramatable');
 
     return Scaffold(
       appBar: AppBar(
@@ -47,15 +47,36 @@ class IlanDetayScreen extends StatelessWidget {
             height: 231,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                begin: Alignment.topCenter,
+                begin: Alignment.center,
                 end: Alignment.bottomCenter,
                 colors: [
                   Color.fromARGB(0, 0, 0, 0),
-                  Color.fromARGB(252, 242, 244, 245)
+                  Colors.black38
                 ],
               ),
             ),
-          ),
+          ),Positioned(
+                  top: 20,
+                  left: 12,
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.25),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: IconButton(
+                      icon: Padding(
+                        padding: const EdgeInsets.only(right: 4),
+                        child: Icon(Icons.arrow_back_ios_new_rounded,
+                            color: Colors.white, size: 20),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                ),
         ],
       ),
    Container(

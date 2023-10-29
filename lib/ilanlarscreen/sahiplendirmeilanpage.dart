@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:evcildostum/ilanlarscreen/sahiplendirmedetaypage.dart';
 import 'package:flutter/material.dart';
 
 class SahiplendirmeIlanPage extends StatefulWidget {
@@ -55,7 +56,16 @@ class _SahiplendirmeIlanPageState extends State<SahiplendirmeIlanPage> {
                           ? Colors.pinkAccent.shade100.withOpacity(0.8)
                           : Colors.blue.shade800.withOpacity(0.6);
 
-                      return Card(
+                     return InkWell(
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SahiplendirmeDetayScreen(documentId: document.id), // Doküman ID'sini geçiriyoruz
+      ),
+    );
+  },
+  child: Card(
                           elevation: 3,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15),
@@ -164,7 +174,7 @@ class _SahiplendirmeIlanPageState extends State<SahiplendirmeIlanPage> {
                                 ],
                               ),
                             ]),
-                          ));
+                          )));
                     }).toList(),
                   );
                 })));

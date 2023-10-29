@@ -36,17 +36,30 @@ class _IcerikDetayPageState extends State<IcerikDetayPage> {
           Map<String, dynamic> data =
               snapshot.data!.data() as Map<String, dynamic>;
 
-          return Scaffold(
-            body: Stack(
-              children: [
-                // Görsel
-                Image.network(
-                  data['gorsel'],
-                  height: MediaQuery.of(context).size.height / 2.9,
-                  width: MediaQuery.of(context).size.width,
-                  fit: BoxFit.cover,
-                ),
-                Positioned(
+          return SingleChildScrollView(
+  child: Column(
+    children: [
+      Stack(
+        children: [ 
+          Image.network(
+            data['gorsel'],
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: 230,
+          ),
+          Container(
+            height: 231,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.center,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromARGB(0, 0, 0, 0),
+                  Colors.black38
+                ],
+              ),
+            ),
+          ),Positioned(
                   top: 20,
                   left: 12,
                   child: Container(
@@ -68,80 +81,65 @@ class _IcerikDetayPageState extends State<IcerikDetayPage> {
                     ),
                   ),
                 ),
-
-                DraggableScrollableSheet(
-                  initialChildSize: 0.64,
-                  minChildSize: 0.64,
-                  maxChildSize: 0.64,
-                  builder: (BuildContext context, myscrollController) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(25),
-                          topRight: Radius.circular(25),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            spreadRadius:
-                                2, //bu değer gölgenin yayılma yarıçapı
-                            blurRadius: 5, //bu gölgenin bulanıklık yarıçapı
-                            offset: Offset(
-                                0, -6), //bu Gölgenin x ve y offset değerleri
+        ],
+      ),
+   Container(
+  child: Padding(
+    padding: const EdgeInsets.all(10.0),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+ SizedBox(height: 18,),
+             Text(
+                              data['baslik'],  textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 21, 
+                                 fontWeight: FontWeight.bold,
+                                  color: Colors.grey.shade800),
+                            
                           ),
-                        ],
-                        border: Border.all(
-                          color: Colors.grey,
-                          width: 0.5,
-                        ),
-                      ),
-                      child: ListView(
-                        controller: PrimaryScrollController.of(context),
-                        children: [
+              
+                          
+        
+      ]),  
                           Padding(
                             padding: const EdgeInsets.only(
-                                left: 26, right: 26, bottom: 10, top: 25),
-                            child: Text(
-                              data['baslik'],
-                              style: TextStyle(
-                                  fontSize: 21,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.blueGrey.shade900),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 26, right: 26, top: 5, bottom: 20),
-                            child: Text(
-                              data['yazi'],
-                              style: TextStyle(
+                                left: 26, right: 26, top: 25, bottom: 20),
+                            child: Text( 
+                              data['yazi'],  textAlign: TextAlign.center,
+                              style: TextStyle( 
                                   fontSize: 16,
                                   color: Colors.blueGrey.shade700,
                                   fontWeight: FontWeight.w100),
                             ),
                           ),
-                          ...List.generate(5, (index) {
-                            String altbaslikKey = 'altbaslik${index + 1}';
-                            String yaziKey = 'yazi${index + 2}';
+                          ...List.generate(5, (index) { 
+                            String altbaslikKey = 'altbaslik${index + 1}'; 
+                            String yaziKey = 'yazi${index + 2}'; 
                             if (data[altbaslikKey] != null &&
                                 data[yaziKey] != null) {
-                              return Padding(
-                                padding: const EdgeInsets.only(
+                              return Padding( 
+                                padding: const EdgeInsets.only( 
                                     left: 26, right: 26, top: 15, bottom: 25),
-                                child: Column(
+                                child: Column( 
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      data[altbaslikKey],
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.blueGrey.shade900),
+                                    Center(
+                                      child: Text(  
+                                        data[altbaslikKey],    textAlign: TextAlign.center, 
+                                        style: TextStyle( 
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.blueGrey.shade800),
+                                      ),
                                     ),
                                     SizedBox(height: 10),
                                     Text(
-                                      data[yaziKey],
+                                      data[yaziKey],  textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontSize: 16,
                                           color: Colors.blueGrey.shade700,
@@ -153,39 +151,37 @@ class _IcerikDetayPageState extends State<IcerikDetayPage> {
                             }
                             return Container();
                           }),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 26.0, vertical: 10),
-                            child: Text(
-                              "Ekleyen: Evcil Dostum",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.amber.shade600,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
+Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+           
+            Text('Ekleyen: Evcil Dostum', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.blueGrey.shade700,)),
+          ],
+             ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 26.0, vertical: 20),
                             child: Text(
                               "Etiketler: ${data['tags'] is String ? (data['tags'] as String).split(', ').join(', ') : 'Etiket Yok'}",
                               style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 13,
                                   fontStyle: FontStyle.italic,
                                   fontWeight: FontWeight.w500,
                                   color: Colors.blueGrey.shade800),
                             ),
-                          ),
+                          ), 
+          
+       
                         ],
                       ),
-                    );
-                  },
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
+    ))]));}));
+                  }
+                
+              
+            
+          
+        }
+      
+    
+  
+

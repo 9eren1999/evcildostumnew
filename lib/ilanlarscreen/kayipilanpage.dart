@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:evcildostum/ilanlarscreen/kayipdetaypage.dart';
 import 'package:flutter/material.dart';
 
 class KayipIlanPage extends StatefulWidget {
@@ -55,10 +56,20 @@ class _KayipIlanPageState extends State<KayipIlanPage> {
                           ? Colors.pinkAccent.shade100.withOpacity(0.6)
                           : Colors.blue.shade800.withOpacity(0.6);
 
-                      return Card(
-                          elevation: 3,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
+                      return InkWell(
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => KayipDetayScreen(documentId: document.id), // Doküman ID'sini geçiriyoruz
+      ),
+    );
+  },
+  child: Card(
+    elevation: 3,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20),
+  
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
@@ -148,7 +159,7 @@ class _KayipIlanPageState extends State<KayipIlanPage> {
                                 ],
                               ),
                             ]),
-                          ));
+                          )));
                     }).toList(),
                   );
                 })));
