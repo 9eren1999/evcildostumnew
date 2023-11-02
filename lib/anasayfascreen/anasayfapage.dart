@@ -23,6 +23,22 @@ class AnasayfaPage extends StatefulWidget {
 
 class _AnasayfaPageState extends State<AnasayfaPage> {
   int selectedPetIndex = 0;
+  late Map<String, dynamic> userInfo;
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    getUserInfo().then((data) {
+      setState(() {
+        userInfo = data.data() as Map<String, dynamic>;
+        isLoading = false;
+      });
+    }).catchError((error) {
+      // Hata işleme
+    });
+  }
+
   Future<DocumentSnapshot> getUserInfo() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
@@ -34,6 +50,7 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
       throw Exception('Kullanıcı oturum açmadı');
     }
   }
+
 
   void navigateToPage(BuildContext context, int pageIndex) {
     switch (pageIndex) {
@@ -117,7 +134,9 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
+    
         body: Stack(children: [
       Column(children: [
         Expanded(
@@ -152,7 +171,7 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.only(top: 5),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -229,55 +248,82 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
             ),
           ),
         ),
-        Expanded(
-          flex: 6,
-          child: Container(
-            child: ScrollConfiguration(
-              behavior: MyScrollBehavior(),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 32, right: 32, top: 155),
-                child: GridView.count(
-                  crossAxisCount: 3,
-                  children: List.generate(7, (index) {
-                    return Card(
-                      child: InkWell(
-                        onTap: () => navigateToPage(context, index),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(
-                              menuIcons[index],
-                              size: 35,
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(menuNames[index]),
-                          ],
-                        ),
-                      ),
-                    );
-                  }),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ]),
-      Positioned(
-          top: MediaQuery.of(context).size.height * 0.12,
-          left: 20,
-          right: 20,
-          child: Container(
-              height: 245,
-              decoration: BoxDecoration(
-                color: Colors.white,
+      Expanded(
+  flex: 6,
+  child: Container(
+    child: ScrollConfiguration(
+      behavior: MyScrollBehavior(),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 27, right: 27, top: 170),
+        child: GridView.count(
+          crossAxisCount: 3,
+          children: List.generate(6, (index) {
+            return Card(
+              color: menuColors[index].withOpacity(0.75), // Kartın rengini burada ayarlayabilirsiniz.
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: Colors.black12,
-                  width: 2,
+              ),
+              child: InkWell(
+                onTap: () => navigateToPage(context, index),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      width: 55,  // İkon arka planının genişliği
+                      height: 55, // İkon arka planının yüksekliği
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.15), // İkon arka plan rengi
+                        shape: BoxShape.circle, // Arka planın şekli
+                      ),
+                      child: Icon(
+                        menuIcons[index],
+                        size: 28,
+                        color: Colors.white, // İkonun rengi
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      menuNames[index],
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white, // Metnin rengi
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
                 ),
               ),
+            );
+          }),
+        ),
+      ),
+    ),
+  ),
+),
+
+
+
+      ]),
+     Positioned(
+  top: MediaQuery.of(context).size.height * 0.12,
+  left: 20,
+  right: 20,
+  child: Container(
+    height: 245,
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(20),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.20), 
+          spreadRadius: 0.1, 
+          blurRadius: 1,
+          offset: Offset(0, 1), // Yatay ve dikey konumlandırma
+        ),
+      ],
+    ),
               child: FutureBuilder<DocumentSnapshot>(
                 future: getUserInfo(),
                 builder: (BuildContext context,

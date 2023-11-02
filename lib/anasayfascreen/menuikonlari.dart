@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
 
 List<IconData> menuIcons = [
-  Icons.location_on,
+  Icons.location_on,  
   Icons.analytics_outlined,
-  Icons.pets,
   Icons.assignment_add,
   Icons.near_me,
-  Icons.settings,
   Icons.favorite,
+  Icons.health_and_safety_sharp,
+];
+
+List<Color> menuColors = [
+  Colors.tealAccent.shade700,
+  Colors.orange,  
+  Colors.cyan,     
+  Colors.blue.shade400,
+    Colors.red.shade400,     
+  Colors.lightGreen, 
+ 
+      
 ];
 
 List<String> menuNames = [
   'Yakınımda',
   'Beslenme',
-  'Dostlarım',
   'Asistan',
   'İsim Önericisi',
-  'Destek Merkezi',
   'Favorilerim',
+  'Destek Merkezi',
 ];
