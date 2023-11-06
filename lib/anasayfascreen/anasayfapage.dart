@@ -81,7 +81,7 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
       case 4:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => IsimOnericiPage()),
+          MaterialPageRoute(builder: (context) => FavorilerimPage()),
         );
         break;
       case 5:

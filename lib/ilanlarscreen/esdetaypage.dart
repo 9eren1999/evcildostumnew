@@ -90,29 +90,36 @@ class EsDetayScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.03), // Ekran genişliğinin %5'i kadar sol padding ekler
+              padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.03),
               child: Text(
                 data['name'],
                 style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold, color: Colors.grey.shade800),
               ),
-            ), SizedBox(width: 10,),
-            Text(
-              data['sahip'],
-              style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+            ),
+            SizedBox(width: 10),
+            Flexible( 
+              child: Text(
+                data['sahip'],
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+              ),
             ),
           ],
         ), 
-       Padding(
-              padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.03),
-         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Icon(Icons.location_on, color: Colors.grey.shade800, size: 15,), // Şehir için farklı bir ikon kullanabilirsiniz
-            Text('${data['sehir']}', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.grey.shade800)),
-          ],
-             ),
-       ),
-
+        Padding(
+          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.03),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Icon(Icons.location_on, color: Colors.grey.shade800, size: 15),
+              SizedBox(width: 4), 
+              Text(
+                '${data['sehir']}',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.grey.shade800),
+              ),
+            ],
+          ),
+        ),
         SizedBox(height: 15,),
           Padding(
               padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.032),
@@ -127,7 +134,7 @@ class EsDetayScreen extends StatelessWidget {
         Column(
   children: [
     Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround, // widget'ları eşit aralıklarla dağıtır
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Row(
           children: [
@@ -138,14 +145,14 @@ class EsDetayScreen extends StatelessWidget {
         ),
         Row(
           children: [
-            Image.asset('assets/images/yas.png', cacheHeight: 25, cacheWidth: 25), // Irk için farklı bir ikon kullanabilirsiniz
+            Image.asset('assets/images/yas.png', cacheHeight: 25, cacheWidth: 25),
             SizedBox(width: 5),
             Text('${data['tur']}', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.grey.shade800)),
           ],
         ),
         Row(
           children: [
-            Image.asset('assets/images/yas.png', cacheHeight: 25, cacheWidth: 25), // Cinsiyet için farklı bir ikon kullanabilirsiniz
+            Image.asset('assets/images/yas.png', cacheHeight: 25, cacheWidth: 25),
             SizedBox(width: 5),
             Text('${data['cinsiyet']}', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.grey.shade800)),
           ],
@@ -164,7 +171,7 @@ class EsDetayScreen extends StatelessWidget {
         Center(
           child: ElevatedButton(
             onPressed: () {
-              // Buton işlevsiz, buraya kod ekleyerek işlevsellik sağlanabilir
+             
             },
             style: ElevatedButton.styleFrom(
               elevation: 0,
@@ -172,7 +179,7 @@ class EsDetayScreen extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20), 
               ),
-              minimumSize: Size(MediaQuery.of(context).size.width * 0.8, 36), // Buton genişliği ayarlandı
+              minimumSize: Size(MediaQuery.of(context).size.width * 0.8, 36), 
             ),
             child: Text('İletişime Geç'),
           ),

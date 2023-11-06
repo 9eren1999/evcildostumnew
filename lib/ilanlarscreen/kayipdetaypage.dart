@@ -90,15 +90,19 @@ class KayipDetayScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.03), // Ekran genişliğinin %5'i kadar sol padding ekler
+              padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.03),
               child: Text(
                 data['name'],
                 style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold, color: Colors.grey.shade800),
               ),
-            ), SizedBox(width: 10,),
-            Text(
-              data['sahip'],
-              style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+            ),
+            SizedBox(width: 10),
+            Flexible(
+              child: Text(
+                data['sahip'],
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+              ),
             ),
           ],
         ), 
