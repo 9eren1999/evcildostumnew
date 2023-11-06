@@ -69,13 +69,13 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
       case 2:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => DostlarimPage()),
+          MaterialPageRoute(builder: (context) => AsistanPage()),
         );
         break;
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => AsistanPage()),
+          MaterialPageRoute(builder: (context) => IsimOnericiPage()),
         );
         break;
       case 4:
@@ -88,12 +88,6 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => DestekSistemiPage()),
-        );
-        break;
-      case 6:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => FavorilerimPage()),
         );
         break;
 
@@ -140,7 +134,7 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
         body: Stack(children: [
       Column(children: [
         Expanded(
-          flex: 2,
+          flex: 3,
           child: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -152,7 +146,7 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
             child: FutureBuilder<DocumentSnapshot>(
               future: FirebaseFirestore.instance
                   .collection('kullanicilartable')
-                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                  .doc(FirebaseAuth.instance.currentUser?.uid)
                   .get(),
               builder: (BuildContext context,
                   AsyncSnapshot<DocumentSnapshot> snapshot) {
@@ -249,17 +243,17 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
           ),
         ),
       Expanded(
-  flex: 6,
+  flex: 7,
   child: Container(
     child: ScrollConfiguration(
       behavior: MyScrollBehavior(),
       child: Padding(
-        padding: const EdgeInsets.only(left: 27, right: 27, top: 170),
+        padding: const EdgeInsets.only(left: 27, right: 27, top: 115),
         child: GridView.count(
           crossAxisCount: 3,
           children: List.generate(6, (index) {
             return Card(
-              color: menuColors[index].withOpacity(0.75), // Kartın rengini burada ayarlayabilirsiniz.
+              color: menuColors[index].withOpacity(0.75),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
@@ -269,11 +263,11 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Container(
-                      width: 55,  // İkon arka planının genişliği
-                      height: 55, // İkon arka planının yüksekliği
+                      width: 55, 
+                      height: 55, 
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.15), // İkon arka plan rengi
-                        shape: BoxShape.circle, // Arka planın şekli
+                        color: Colors.white.withOpacity(0.15), 
+                        shape: BoxShape.circle, 
                       ),
                       child: Icon(
                         menuIcons[index],
@@ -308,19 +302,19 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
       ]),
      Positioned(
   top: MediaQuery.of(context).size.height * 0.12,
-  left: 20,
-  right: 20,
+  left: 40,
+  right: 40,
   child: Container(
-    height: 245,
+    height: 235,
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(20),
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withOpacity(0.20), 
-          spreadRadius: 0.1, 
-          blurRadius: 1,
-          offset: Offset(0, 1), // Yatay ve dikey konumlandırma
+          color: Colors.black.withOpacity(0.05), 
+          spreadRadius: 0, 
+          blurRadius: 4,
+          offset: Offset(0, 2), // Yatay ve dikey konumlandırma
         ),
       ],
     ),
@@ -393,11 +387,11 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
                                           children: [
                                             Container(
                                               width: selectedPetIndex == index
-                                                  ? 70
-                                                  : 50,
+                                                  ? 60
+                                                  : 60,
                                               height: selectedPetIndex == index
-                                                  ? 70
-                                                  : 50,
+                                                  ? 60
+                                                  : 60,
                                               decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 border: (selectedPetIndex ==
@@ -413,8 +407,8 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
                                               child: CircleAvatar(
                                                 radius:
                                                     selectedPetIndex == index
-                                                        ? 40
-                                                        : 28,
+                                                        ? 30
+                                                        : 30,
                                                 backgroundImage: NetworkImage(
                                                     petsList[0]['imageUrl']),
                                               ),
@@ -423,8 +417,8 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
                                             Text(
                                               '${petsList[0]['name']}',
                                               style: TextStyle(
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 13,
                                                   color: Colors.grey.shade800),
                                             ),
                                           ],
@@ -456,13 +450,13 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
                                   height: 5,
                                 ),
                                 Container(
-                                  width: 80,
+                                  width: 60,
                                   child: Text(
                                     calculateAge(
                                         '${userInfo[petsKeys[selectedPetIndex]][0]['dogum_tarihi']}'),
                                     style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 13,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 12,
                                         color: Colors.grey.shade800),
                                     textAlign: TextAlign.center,
                                   ),
@@ -480,12 +474,12 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
                                   height: 5,
                                 ),
                                 Container(
-                                  width: 80,
+                                  width: 60,
                                   child: Text(
                                     '${userInfo[petsKeys[selectedPetIndex]][0]['kilo']} Gr',
                                     style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 13,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 12,
                                         color: Colors.grey.shade800),
                                     textAlign: TextAlign.center,
                                   ),
@@ -503,40 +497,18 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
                                   height: 5,
                                 ),
                                 Container(
-                                  width: 80,
+                                  width: 60,
                                   child: Text(
                                     '${userInfo[petsKeys[selectedPetIndex]][0]['irk']}',
                                     style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 13,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 12,
                                         color: Colors.grey.shade800),
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Image.asset(
-                                  'assets/images/gender.png',
-                                  cacheHeight: 35,
-                                  cacheWidth: 35,
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Container(
-                                  width: 80,
-                                  child: Text(
-                                    '${userInfo[petsKeys[selectedPetIndex]][0]['cinsiyet']}',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 13,
-                                        color: Colors.grey.shade800),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ],
+                              ],       
+                              
                             ),
                           ],
                         ),

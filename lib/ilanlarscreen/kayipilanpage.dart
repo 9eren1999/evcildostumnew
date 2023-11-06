@@ -17,7 +17,7 @@ class _KayipIlanPageState extends State<KayipIlanPage> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Kayıp İlanları'),
+          title: Text('Kayıp İlanları', style: TextStyle(fontWeight: FontWeight.w800),),
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios_new_outlined,
                 color: Colors.grey.shade800, size: 18),

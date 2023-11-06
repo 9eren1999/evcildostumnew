@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           textTheme: ThemeData.light().textTheme.apply(
                 fontFamily: 'SFProDisplay',
               )),
-      home: NavBarPage(),
+      home: NavBarPage()
     );
   }
 }

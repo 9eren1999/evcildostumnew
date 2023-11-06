@@ -101,7 +101,7 @@ class _KonumTakibiPageState extends State<KonumTakibiPage> {
                                   radius: 15,
                                 ),
                                 SizedBox(width: 10),
-                                Text('Atilla', style: TextStyle(color: Colors.grey.shade800),),
+                                Text('Bulut', style: TextStyle(color: Colors.grey.shade800),),
                               ],
                             ),
                           ),
