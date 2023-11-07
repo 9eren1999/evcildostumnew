@@ -12,7 +12,6 @@ class _KonumTakibiPageState extends State<KonumTakibiPage> {
   bool fullScreen = false;
   LatLng? markerLocation;
   String selectedAnimal = 'akita';
-  
 
   @override
   void initState() {
@@ -20,9 +19,6 @@ class _KonumTakibiPageState extends State<KonumTakibiPage> {
     fetchLocationFromFirestore();
     setCustomMarker();
   }
-
-
-  
 
   void fetchLocationFromFirestore() async {
     final DocumentSnapshot doc = await FirebaseFirestore.instance
@@ -43,10 +39,10 @@ class _KonumTakibiPageState extends State<KonumTakibiPage> {
 
   void setCustomMarker() async {
     customMarker = await BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(size: Size(150,150)), 'assets/images/marker.png');
+        ImageConfiguration(size: Size(150, 150)), 'assets/images/marker.png');
   }
 
- @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
@@ -70,11 +66,13 @@ class _KonumTakibiPageState extends State<KonumTakibiPage> {
           Positioned(
             left: 10,
             top: 50,
-            child: Container( 
-              padding: EdgeInsets.symmetric(horizontal: 12,),
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 12,
+              ),
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.75),
-                borderRadius: BorderRadius.circular(10), // Kenarları yumuşatmak
+                borderRadius: BorderRadius.circular(10),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.2),
@@ -97,22 +95,23 @@ class _KonumTakibiPageState extends State<KonumTakibiPage> {
                             child: Row(
                               children: [
                                 CircleAvatar(
-                                  backgroundImage: AssetImage('assets/images/akita.png'),
+                                  backgroundImage:
+                                      AssetImage('assets/images/akita.png'),
                                   radius: 15,
                                 ),
                                 SizedBox(width: 10),
-                                Text('Bulut', style: TextStyle(color: Colors.grey.shade800),),
+                                Text(
+                                  'Bulut',
+                                  style: TextStyle(color: Colors.grey.shade800),
+                                ),
                               ],
                             ),
                           ),
-                         
-                            
-                          
                         ],
                       ),
                       value: 'akita',
                     ),
-                    // Diğer hayvanlar için DropdownMenuItem ekleyebilirsiniz
+                    // diğer hayvanlar için dropdownmenuItem
                   ],
                   onChanged: (newValue) {
                     setState(() {

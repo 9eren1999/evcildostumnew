@@ -17,7 +17,10 @@ class _KayipIlanPageState extends State<KayipIlanPage> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Kayıp İlanları', style: TextStyle(fontWeight: FontWeight.w800),),
+          title: Text(
+            'Kayıp İlanları',
+            style: TextStyle(fontWeight: FontWeight.w800),
+          ),
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios_new_outlined,
                 color: Colors.grey.shade800, size: 18),
@@ -57,109 +60,114 @@ class _KayipIlanPageState extends State<KayipIlanPage> {
                           : Colors.blue.shade800.withOpacity(0.6);
 
                       return InkWell(
-  onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => KayipDetayScreen(documentId: document.id), // Doküman ID'sini geçiriyoruz
-      ),
-    );
-  },
-  child: Card(
-    elevation: 3,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20),
-  
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Stack(children: [
-                              Image.network(
-                                data['gorsel'],
-                                fit: BoxFit.cover,
-                                height: double.infinity,
-                                width: double.infinity,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => KayipDetayScreen(
+                                    documentId: document
+                                        .id),
                               ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [Colors.transparent, cardColor],
-                                    begin: Alignment.topRight,
-                                    end: Alignment.bottomCenter,
+                            );
+                          },
+                          child: Card(
+                              elevation: 3,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: Stack(children: [
+                                  Image.network(
+                                    data['gorsel'],
+                                    fit: BoxFit.cover,
+                                    height: double.infinity,
+                                    width: double.infinity,
                                   ),
-                                ),
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                      left: 10,
-                                      right: 10,
-                                      top: 10,
-                                    ),
-                                    child: RichText(
-                                      text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: '${data['name']}',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          TextSpan(
-                                            text: ' (${data['yas']} aylık)',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 13),
-                                          ),
-                                        ],
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        colors: [Colors.transparent, cardColor],
+                                        begin: Alignment.topRight,
+                                        end: Alignment.bottomCenter,
                                       ),
                                     ),
                                   ),
-                                  Divider(
-                                    color: Colors.white,
-                                    thickness: 0.4,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 8, left: 8),
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.location_on,
-                                          size: 16,
-                                          color: Colors.white,
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                          left: 10,
+                                          right: 10,
+                                          top: 10,
                                         ),
-                                        Text('${data['sehir']}',
-                                            style:
-                                                TextStyle(color: Colors.white)),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 8, right: 8, bottom: 8, top: 5),
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.pets,
-                                          size: 15,
-                                          color: Colors.white,
+                                        child: RichText(
+                                          text: TextSpan(
+                                            children: [
+                                              TextSpan(
+                                                text: '${data['name']}',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text: ' (${data['yas']} aylık)',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 13),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                        SizedBox(width: 2),
-                                        Text('${data['tur']}',
-                                            style:
-                                                TextStyle(color: Colors.white)),
-                                      ],
-                                    ),
+                                      ),
+                                      Divider(
+                                        color: Colors.white,
+                                        thickness: 0.4,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            right: 8, left: 8),
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.location_on,
+                                              size: 16,
+                                              color: Colors.white,
+                                            ),
+                                            Text('${data['sehir']}',
+                                                style: TextStyle(
+                                                    color: Colors.white)),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 8,
+                                            right: 8,
+                                            bottom: 8,
+                                            top: 5),
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.pets,
+                                              size: 15,
+                                              color: Colors.white,
+                                            ),
+                                            SizedBox(width: 2),
+                                            Text('${data['tur']}',
+                                                style: TextStyle(
+                                                    color: Colors.white)),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            ]),
-                          )));
+                                ]),
+                              )));
                     }).toList(),
                   );
                 })));

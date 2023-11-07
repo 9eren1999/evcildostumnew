@@ -11,7 +11,6 @@ class PetDetails extends StatefulWidget {
 
 class _PetDetailsState extends State<PetDetails> {
   String _calculateAge(String birthDate) {
-    // Burada yaş hesaplama işleminizi gerçekleştirebilirsiniz.
     return "Yaş hesaplanacak";
   }
 

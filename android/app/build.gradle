@@ -22,6 +22,12 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def keyProperties = new Properties()
+def keyPropertiesFile = rootProject.file('key.properties')
+if(keyPropertiesFile.exists()){
+    keyProperties.load(new FileInputStream(keyPropertiesFile))
+}
+
 android {
     namespace "com.example.evcildostum"
     compileSdkVersion flutter.compileSdkVersion
@@ -41,18 +47,27 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.evcildostum"
+        applicationId "com.evcildostumtr.evcildostum"
         minSdkVersion 20
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
 
+    signingConfigs {
+        release{
+            keyAlias keyProperties['keyAlias']
+            keyPassword keyProperties['keyPassword']
+            storeFile file(keyProperties['storeFile'])
+            storePassword keyProperties['storePassword']
+        }
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
     }
 }
@@ -62,7 +77,6 @@ flutter {
 }
 
 dependencies {
-
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
     implementation("com.google.firebase:firebase-auth-ktx")
 }

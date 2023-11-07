@@ -5,7 +5,6 @@ import 'package:evcildostum/ayarlarscreen/ayarlarpage.dart';
 import 'package:evcildostum/beslenmescreen/beslenmepage.dart';
 import 'package:evcildostum/bildirimlerscreen/bildirimlerpage.dart';
 import 'package:evcildostum/desteksistemiscreen/desteksistemipage.dart';
-import 'package:evcildostum/dostlarimscreen/dostlarimpage.dart';
 import 'package:evcildostum/favorilerimscreen/favorilerimpage.dart';
 import 'package:evcildostum/isimonericiscreen/isimonericipage.dart';
 import 'package:evcildostum/profilscreen/profilpage.dart';
@@ -50,7 +49,6 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
       throw Exception('Kullanıcı oturum açmadı');
     }
   }
-
 
   void navigateToPage(BuildContext context, int pageIndex) {
     switch (pageIndex) {
@@ -128,9 +126,7 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
-    
         body: Stack(children: [
       Column(children: [
         Expanded(
@@ -242,82 +238,79 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
             ),
           ),
         ),
-      Expanded(
-  flex: 7,
-  child: Container(
-    child: ScrollConfiguration(
-      behavior: MyScrollBehavior(),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 27, right: 27, top: 115),
-        child: GridView.count(
-          crossAxisCount: 3,
-          children: List.generate(6, (index) {
-            return Card(
-              color: menuColors[index].withOpacity(0.75),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: InkWell(
-                onTap: () => navigateToPage(context, index),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      width: 55, 
-                      height: 55, 
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.15), 
-                        shape: BoxShape.circle, 
+        Expanded(
+          flex: 7,
+          child: Container(
+            child: ScrollConfiguration(
+              behavior: MyScrollBehavior(),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 27, right: 27, top: 115),
+                child: GridView.count(
+                  crossAxisCount: 3,
+                  children: List.generate(6, (index) {
+                    return Card(
+                      color: menuColors[index].withOpacity(0.75),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                      child: Icon(
-                        menuIcons[index],
-                        size: 28,
-                        color: Colors.white, // İkonun rengi
+                      child: InkWell(
+                        onTap: () => navigateToPage(context, index),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              width: 55,
+                              height: 55,
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.15),
+                                shape: BoxShape.circle,
+                              ),
+                              child: Icon(
+                                menuIcons[index],
+                                size: 28,
+                                color: Colors.white, // İkonun rengi
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              menuNames[index],
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.white, // Metnin rengi
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      menuNames[index],
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.white, // Metnin rengi
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
+                    );
+                  }),
                 ),
               ),
-            );
-          }),
+            ),
+          ),
         ),
-      ),
-    ),
-  ),
-),
-
-
-
       ]),
-     Positioned(
-  top: MediaQuery.of(context).size.height * 0.12,
-  left: 40,
-  right: 40,
-  child: Container(
-    height: 235,
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(20),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.05), 
-          spreadRadius: 0, 
-          blurRadius: 4,
-          offset: Offset(0, 2), // Yatay ve dikey konumlandırma
-        ),
-      ],
-    ),
+      Positioned(
+          top: MediaQuery.of(context).size.height * 0.12,
+          left: 40,
+          right: 40,
+          child: Container(
+              height: 235,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    spreadRadius: 0,
+                    blurRadius: 4,
+                    offset: Offset(0, 2), // Yatay ve dikey konumlandırma
+                  ),
+                ],
+              ),
               child: FutureBuilder<DocumentSnapshot>(
                 future: getUserInfo(),
                 builder: (BuildContext context,
@@ -507,8 +500,7 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
-                              ],       
-                              
+                              ],
                             ),
                           ],
                         ),
