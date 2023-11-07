@@ -46,7 +46,7 @@ class _IsimOnericiPageState extends State<IsimOnericiPage> {
       borderRadius: BorderRadius.circular(20),
     ),
     child: Padding(
-      padding: EdgeInsets.all(8.0),
+      padding: EdgeInsets.only(top: 10, bottom: 5),
       child: Column(
         children: [
           Text(title, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
@@ -85,11 +85,11 @@ class _IsimOnericiPageState extends State<IsimOnericiPage> {
          leading: IconButton(
     icon: Icon(Icons.arrow_back_ios_rounded ,color: Colors.grey.shade800, size: 19,),
     onPressed: () {
-      Navigator.of(context).pop(); // Bir önceki sayfaya döner
+      Navigator.of(context).pop();
     },
   ),
         actions: [
-          if (isimOnerildi) // İsim önerildiğinde yeniden filtrele butonunu göster
+          if (isimOnerildi)
             TextButton(
               onPressed: resetFilters,
               child: Text('Yeniden Filtrele', style: TextStyle(color: Colors.orange),),
@@ -103,7 +103,7 @@ class _IsimOnericiPageState extends State<IsimOnericiPage> {
  Widget buildFilterView() {
   return Center(
     child: Padding(
-      padding: const EdgeInsets.all(22.0),
+      padding: const EdgeInsets.all(15.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -115,7 +115,7 @@ class _IsimOnericiPageState extends State<IsimOnericiPage> {
                   setState(() => secilenTur = val);
                 }),
               ),
-              SizedBox(width: 12), 
+              SizedBox(width: 2), 
               Expanded(
                 child: buildCardChoice(
                     'Cinsiyet', ['Erkek', 'Dişi'], secilenCinsiyet, (val) {

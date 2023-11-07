@@ -49,6 +49,8 @@ dependencies:
   progress_border: ^0.1.2
   google_maps_flutter: ^2.5.0
   persistent_bottom_nav_bar_v2: ^4.2.8
+  geolocator: ^10.1.0
+  url_launcher: ^6.2.1
 
 dev_dependencies:
   flutter_test:

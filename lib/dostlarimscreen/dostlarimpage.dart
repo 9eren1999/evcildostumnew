@@ -8,7 +8,7 @@ class DostlarimPage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Text(
-          "Burası Dostlarım Sayfası",
+          "Evcil Hayvan Profillerim Sayfası",
           style: TextStyle(fontSize: 25),
         ),
       ),
