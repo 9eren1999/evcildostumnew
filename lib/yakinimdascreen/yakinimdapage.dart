@@ -13,6 +13,7 @@ class YakinimdaPage extends StatefulWidget {
 class _YakinimdaPageState extends State<YakinimdaPage> {
   Position? _currentUserPosition;
   List<Veteriner> _sortedVeterinerler = [];
+  
 
   Future<Position> _determinePosition() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -139,16 +140,14 @@ class _YakinimdaPageState extends State<YakinimdaPage> {
         borderRadius: BorderRadius.circular(20.0),
       ),
       child: ListTile(
-        title: Text(veteriner.isim,
-            style: TextStyle(
-                fontWeight: FontWeight.w600,
-                color: Colors.grey.shade800,
-                fontSize: 14)),
-        subtitle: Text(distanceString,
-            style: TextStyle(
-                fontWeight: FontWeight.w400,
-                color: Colors.grey.shade500,
-                fontSize: 12)),
+      title: Text(veteriner.isim, style: TextStyle(fontWeight: FontWeight.w600, color: Colors.grey.shade800,fontSize: 14)),
+      subtitle: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(veteriner.adres, style: TextStyle(fontWeight: FontWeight.w500, color: Colors.grey.shade500,fontSize: 12)),
+          Text(formatDistance(distance), style: TextStyle(fontWeight: FontWeight.w300, color: Colors.grey.shade500,fontSize: 10)),
+        ],
+      ),
         trailing: Icon(Icons.arrow_forward_ios,
             color: Colors.grey.shade700, size: 19),
         onTap: _launchMapsUrl,
