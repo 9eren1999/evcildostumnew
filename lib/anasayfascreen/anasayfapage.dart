@@ -479,29 +479,28 @@ class _AnasayfaPageState extends State<AnasayfaPage> {
                                 ),
                               ],
                             ),
-                            Column(
-                              children: [
-                                Image.asset(
-                                  'assets/images/irk.png',
-                                  cacheHeight: 35,
-                                  cacheWidth: 35,
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Container(
-                                  width: 60,
-                                  child: Text(
-                                    '${userInfo[petsKeys[selectedPetIndex]][0]['irk']}',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 12,
-                                        color: Colors.grey.shade800),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ],
-                            ),
+                           Column(
+  children: [
+    Image.asset(
+      'assets/images/irk.png',
+      cacheHeight: 35,
+      cacheWidth: 35,
+    ),
+    SizedBox(height: 5),
+    Container(
+      width: 70,
+      child: Text(
+        '${userInfo[petsKeys[selectedPetIndex]][0]['irk']}',
+        style: TextStyle(
+          fontWeight: FontWeight.w400,
+          fontSize: 12,
+          color: Colors.grey.shade800),
+        textAlign: TextAlign.center,
+        overflow: TextOverflow.ellipsis,  // Metni "..." ile kısalt
+      ),
+    ),
+  ],
+),
                           ],
                         ),
                     ]);
