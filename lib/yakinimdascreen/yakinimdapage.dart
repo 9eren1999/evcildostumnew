@@ -122,12 +122,15 @@ class _YakinimdaPageState extends State<YakinimdaPage> {
       veteriner.enlem,
       veteriner.boylam,
     );
+    // ignore: unused_local_variable
     String distanceString = formatDistance(distance);
 
     // URL'i açacak yeni fonksiyon
     void _launchMapsUrl() async {
       final url = veteriner.mapsUrl;
+      // ignore: deprecated_member_use
       if (await canLaunch(url)) {
+        // ignore: deprecated_member_use
         await launch(url);
       } else {
         throw 'Harita açılamadı $url';
