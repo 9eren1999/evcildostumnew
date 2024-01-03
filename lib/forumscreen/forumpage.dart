@@ -16,7 +16,7 @@ class ForumPage extends StatefulWidget {
 
 class _ForumPageState extends State<ForumPage> {
   String? username;
-  bool _isLoading = true;
+  bool _isLoading = false;
   bool showAllComments = false;
   Map<String, TextEditingController> _commentControllers = {};
   String? expandedPostId; // Hangi postun yorumları genişletildiğini takip eder
